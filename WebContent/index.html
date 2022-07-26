@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="resources/css/vuetify.min.css?nocache=6">
+    <link rel="stylesheet" href="resources/fontawesome/css/all.css">
+    <link rel="stylesheet" href="index.css">
+    <title>Comparação de Arquivos</title>
+</head>
+
+<body>
+    <div id="home">
+        <v-app fluid>
+            <div>
+                <cabecalho></cabecalho>               
+                <v-container class="container-pagina">
+                    <div>
+                        <p class="texto-titulo d-flex justify-center">Selecione 2 arquivos para saber a porcentagem de semelhança.</p>
+                    </div>
+                    <div class="alinhamento-card" v-for="i">
+                        <v-row>
+                            <v-col lg="6" md="6"sm="6">
+                                <v-card class="tamanho-card" color="#273c75">
+                                    <div class="alinhamento-card">                                        
+                                            <v-btn><label  for="arquivo1">Arquivo 1</label></v-btn>                                                                                
+                                    </div>    
+                                        <v-file-input v-model="form.arquivo1" style="display:none" id="arquivo1" hide-input>
+                                        </v-file-input>                                    
+                                </v-card>
+                            </v-col>
+                            <v-col  lg="6" md="6"sm="6">
+                                <v-card class="tamanho-card" color="#273c75">
+                                    <div class="alinhamento-card">                                        
+                                            <v-btn><label  for="arquivo1">Arquivo 2</label></v-btn>                                                                                
+                                    </div>    
+                                        <v-file-input v-model="form.arquivo2"  style="display:none" id="arquivo1" hide-input>
+                                        </v-file-input>                                    
+                                </v-card>
+                            </v-col>                            
+                        </v-row>                        
+                    </div>
+                    <div class="texto-porcentagem d-flex justify-center"><p >PORCENTAGEM: </p></div>
+                </v-container>
+                
+            </div>
+        </v-app>
+    </div>
+    <script src="resources/js/vue.js"></script>
+    <script src="resources/js/vuetify.min.js"></script>
+    <script src="resources/js/httpVueLoader.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
