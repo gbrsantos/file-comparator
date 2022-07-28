@@ -9,49 +9,83 @@
     <link rel="stylesheet" href="resources/css/vuetify.min.css?nocache=6">
     <link rel="stylesheet" href="resources/fontawesome/css/all.css">
     <link rel="stylesheet" href="index.css">
-    <title>Comparação de Arquivos</title>
+    <title>Comparação de PDF</title>
 </head>
 
 <body>
     <div id="home">
         <v-app fluid>
             <div>
-                <cabecalho></cabecalho>               
+                <cabecalho></cabecalho>
                 <v-container class="container-pagina">
                     <div>
-                        <p class="texto-titulo d-flex justify-center">Selecione 2 arquivos para saber a porcentagem de semelhança.</p>
+                        <p class="texto-titulo d-flex justify-center">Selecione os 2 arquivos PDF para saber a
+                            porcentagem de semelhança entre ambos</p>
                     </div>
-                    <div class="alinhamento-card" v-for="i">
+                    <div class="alinhamento-card">
                         <v-row>
-                            <v-col lg="6" md="6"sm="6">
+                            <v-col lg="6" md="6" sm="6">
                                 <v-card class="tamanho-card" color="#273c75">
-                                    <div class="alinhamento-card">                                        
-                                            <v-btn><label  for="arquivo1">Arquivo 1</label></v-btn>                                                                                
-                                    </div>    
-                                        <v-file-input v-model="form.arquivo1" style="display:none" id="arquivo1" hide-input>
-                                        </v-file-input>                                    
+                                    <div class="alinhamento-card">
+                                        <div v-if="arquivo1">
+                                            <v-chip>
+                                                {{arquivo1.name}}
+                                            <v-icon class="ml-2" @click="limparFile('arquivo1')">
+                                                fas fa-times
+                                            </v-icon>
+                                        </v-chip>
+                                        </div>
+                                        <div v-else>
+                                            <v-btn height="70" width="200"><label class="tamanho-label" for="arquivo1">CARREGAR PDF 1</label></v-btn>
+                                        </div>
+                                    </div>
+                                    <v-file-input :disabled="loader" accept="application/pdf" v-model="arquivo1"
+                                        style="display:none" id="arquivo1" hide-input>
+                                    </v-file-input>
                                 </v-card>
                             </v-col>
-                            <v-col  lg="6" md="6"sm="6">
+                            <v-col lg="6" md="6" sm="6">
                                 <v-card class="tamanho-card" color="#273c75">
-                                    <div class="alinhamento-card">                                        
-                                            <v-btn><label  for="arquivo1">Arquivo 2</label></v-btn>                                                                                
-                                    </div>    
-                                        <v-file-input v-model="form.arquivo2"  style="display:none" id="arquivo1" hide-input>
-                                        </v-file-input>                                    
+                                    <div class="alinhamento-card">
+                                        <div v-if="arquivo2">
+                                            <v-chip>{{arquivo2.name}}
+                                                <v-icon class="ml-2" @click="limparFile('arquivo2')">
+                                                    fas fa-times
+                                                </v-icon>
+                                            </v-chip>
+                                        </div>
+                                        <div v-else>
+                                            <v-btn height="70" width="200">
+                                                <label class="tamanho-label" for="arquivo2">CARREGAR PDF 2</label>                                                
+                                            </v-btn>
+                                        </div>
+                                    </div>
+                                    <v-file-input :disabled="loader" accept="application/pdf" v-model="arquivo2"
+                                        style="display:none" id="arquivo2" hide-input>
+                                    </v-file-input>
                                 </v-card>
-                            </v-col>                            
-                        </v-row>                        
+                            </v-col>
+                        </v-row>
                     </div>
-                    <div class="texto-porcentagem d-flex justify-center"><p >PORCENTAGEM: </p></div>
+                    <div v-if="aparecerBotao" class="texto-porcentagem d-flex justify-center">
+                        <v-btn color="#273c75" class="mb-6"  @click="verificarPorcentagem"><span class="texto-botao">CALCULAR</span></v-btn>
+                    </div>
+                    <div v-if="aparecerPorcentagem" class="texto-porcentagem d-flex justify-center">
+                        <p>PORCENTAGEM DE SEMELHANÇA: {{porcentagem}}%</p>
+                    </div>
+                    <div v-if="loader" class="d-flex justify-center">
+                        <v-progress-circular width="7" size="70" indeterminate color="#273c75">
+                        </v-progress-circular>
+                    </div>
                 </v-container>
-                
+
             </div>
         </v-app>
     </div>
     <script src="resources/js/vue.js"></script>
     <script src="resources/js/vuetify.min.js"></script>
     <script src="resources/js/httpVueLoader.js"></script>
+    <script src="resources/js/axios.min.js"></script>
     <script src="index.js"></script>
 </body>
 

@@ -27,3 +27,15 @@
     margin-top: 40px;
     font-weight: bold;
 }
+
+.tamanho-label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    width: 200px;
+}
+
+.texto-botao{
+    color:white;
+}
