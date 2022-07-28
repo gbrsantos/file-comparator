@@ -9,7 +9,13 @@
     
       <v-toolbar-title>Comparação de Arquivos</v-toolbar-title> 
       <v-spacer></v-spacer>
-      <span class="mr-8"><a class="link-github">gbrsantos</a></span>
+      <div>
+      <span class="mr-8"> 
+        <i class="fab fa-github ml-4">
+        </i> 
+        <a href="https://github.com/gbrsantos" target="_blank" class="link-github">gbrsantos</a>        
+      </span>
+      </div>      
     </v-app-bar>
   </div>
 </template>
